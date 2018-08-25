@@ -1,5 +1,11 @@
 package gameoflife;
 
+/**
+ * Cell is a single cell in the board
+ * Have only 2 status : alive or dead.
+ * @author Sathira Kittisukmongkol 5910545868
+ * 			Archawin Tirugsapun 5910545892
+ */
 public class Cell {
 
 	private boolean alive;

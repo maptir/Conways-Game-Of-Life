@@ -7,6 +7,11 @@ import org.junit.Test;
 
 import gameoflife.Game;
 
+/**
+ * Test the Game class.
+ * @author Sathira Kittisukmongkol 5910545868
+ * 			Archawin Tirugsapun 5910545892
+ */
 public class GameTest {
 
 	private Game game;

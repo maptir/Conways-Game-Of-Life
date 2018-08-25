@@ -3,6 +3,11 @@ package gameoflife;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Game class will control the board and the rule of the game.
+ * @author Sathira Kittisukmongkol 5910545868
+ * 			Archawin Tirugsapun 5910545892
+ */
 public class Game {
 
 	private Board board;
@@ -23,29 +28,41 @@ public class Game {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("==================");
+			System.out.println("====================================");
 			gameLogic();
 		}
 	}
 
 	public void gameLogic() {
-		List<Cell> tempCells = new ArrayList<>();
-		for (int i = 0; i < board.getSize(); i++) {
-			for (int j = 0; j < board.getSize(); j++) {
-				Cell cell = board.getCell(i, j);
-				int neighbors = board.countNeighbors(i, j);
+		List<Cell> cellToChange = new ArrayList<>();
+		for (int row = 0; row < board.getSizeOfOneSide(); row++) {
+			for (int column = 0; column < board.getSizeOfOneSide(); column++) {
+				Cell cell = board.getCell(row, column);
+				int neighbors = board.countNeighbors(row, column);
 				if (cell.isAlive()) {
-					if (neighbors < 2 || neighbors > 3) {
-						tempCells.add(cell);
+					if (aliveCellCondition(neighbors)) {
+						cellToChange.add(cell);
 					}
 				} else {
-					if (neighbors == 3) {
-						tempCells.add(cell);
+					if (deadCellCondition(neighbors)) {
+						cellToChange.add(cell);
 					}
 				}
 			}
 		}
-		for (Cell cell : tempCells) {
+		changeSelectedCell(cellToChange);
+	}
+	
+	public boolean aliveCellCondition(int neighbors) {
+		return (neighbors < 2 || neighbors > 3);
+	}
+	
+	public boolean deadCellCondition(int neighbors) {
+		return (neighbors == 3);
+	}
+	
+	public void changeSelectedCell(List<Cell> listCell) {
+		for (Cell cell : listCell) {
 			cell.changeLife();
 		}
 	}
